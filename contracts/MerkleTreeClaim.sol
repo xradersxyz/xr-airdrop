@@ -51,7 +51,7 @@ contract MerkleTreeClaim is Ownable {
         bytes32[] calldata merkleProof
     ) external view returns (bool, uint256) {
         if (claimed[account]) {
-            return (false, 0); // 이미 클레임한 경우
+            return (false, 0); //If a claim has already been made
         }
         bytes32 leaf = keccak256(
             bytes.concat(keccak256(abi.encode(account, amount)))
@@ -59,13 +59,21 @@ contract MerkleTreeClaim is Ownable {
 
         bool valid = MerkleProof.verify(merkleProof, merkleRoot, leaf);
         if (!valid) {
-            return (false, 0); // Merkle Proof가 유효하지 않은 경우
+            return (false, 0); //If Merkle Proof is invalid
         }
-        return (true, amount); // 미수령 토큰 수량 반환
+        return (true, amount); //Return unclaimed token quantity
     }
 
     /**
-     * Merkle Root 업데이트 함수 (관리자용)
+     * A function that allows the contract owner to withdraw all tokens deposited in the contract
+     */
+    function withdrawAll() public onlyOwner {
+        uint256 balance = token.balanceOf(address(this));
+        require(token.transfer(owner(), balance), "Transfer failed");
+    }
+
+    /**
+     * Merkle Root update function (for administrators)
      * @param _newMerkleRoot
      **/
     function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyOwner {
