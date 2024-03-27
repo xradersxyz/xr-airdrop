@@ -15,6 +15,12 @@ contract MerkleTreeClaim is Ownable {
 
     event Claimed(address indexed claimant, uint256 amount);
 
+    /**
+     *
+     * @param initialOwner The owner to be set
+     * @param _token The token contrect address to be set
+     * @param _merkleRoot The merkle root to be set
+     */
     constructor(
         address initialOwner,
         IERC20 _token,
@@ -24,6 +30,11 @@ contract MerkleTreeClaim is Ownable {
         merkleRoot = _merkleRoot;
     }
 
+    /**
+     * Occurs when a claim token is rewarded to the beneficiary.
+     * @param amount The amount to be set
+     * @param merkleProof The proof to be set
+     */
     function claim(uint256 amount, bytes32[] calldata merkleProof) external {
         require(!claimed[msg.sender], "Already claimed.");
         bytes32 leaf = keccak256(
@@ -41,10 +52,22 @@ contract MerkleTreeClaim is Ownable {
         emit Claimed(msg.sender, amount * (10 ** uint256(decimals)));
     }
 
+    /**
+     *
+     * @param account The address to be set
+     */
     function getClaimedAmount(address account) external view returns (uint256) {
         return claimedAmount[account];
     }
 
+    /**
+     *
+     * @param account The address to be set
+     * @param amount The amount to be set
+     * @param merkleProof The merkleProof to be set
+     * @return bool veridation
+     * @return uint256 Return unclaimed token quantity
+     */
     function getUnclaimedAmount(
         address account,
         uint256 amount,
@@ -61,7 +84,7 @@ contract MerkleTreeClaim is Ownable {
         if (!valid) {
             return (false, 0); //If Merkle Proof is invalid
         }
-        return (true, amount); //Return unclaimed token quantity
+        return (true, amount);
     }
 
     /**
@@ -74,8 +97,8 @@ contract MerkleTreeClaim is Ownable {
 
     /**
      * Merkle Root update function (for administrators)
-     * @param _newMerkleRoot
-     **/
+     * @param _newMerkleRoot The new Merkle root to be set
+     */
     function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyOwner {
         merkleRoot = _newMerkleRoot;
     }
