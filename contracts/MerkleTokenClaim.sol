@@ -47,9 +47,9 @@ contract MerkleTreeClaim is Ownable {
 
         claimed[msg.sender] = true;
         claimedAmount[msg.sender] += amount;
-        token.transfer(msg.sender, amount * (10 ** uint256(decimals)));
+        token.transfer(msg.sender, amount);
 
-        emit Claimed(msg.sender, amount * (10 ** uint256(decimals)));
+        emit Claimed(msg.sender, amount);
     }
 
     /**

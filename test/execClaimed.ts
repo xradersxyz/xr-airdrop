@@ -4,7 +4,7 @@ import fs from "fs";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const contractAddress = "0x98439204670b302E873d7c274581207020B37294";
+  const contractAddress = "0x1740435a8753E33DC09242e9b0E21F8528ff59Da";
   const tree = StandardMerkleTree.load(
     JSON.parse(fs.readFileSync("tree.json", "utf8"))
   );

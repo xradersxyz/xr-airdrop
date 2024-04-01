@@ -50,15 +50,15 @@ contract MerkleTokenVesting is TokenVesting, MerkleDistributor, IBunzz {
         require(!isClaimed(index), "Award already claimed");
 
         // Verify the merkle proof.
-        bytes32 node = keccak256(
-            abi.encodePacked(index, account, amount, revocable)
-        );
-
-        //  bytes32 leaf = keccak256(
-        //     bytes.concat(keccak256(abi.encode(account, amount)))
+        // bytes32 node = keccak256(
+        //     abi.encodePacked(index, account, amount, revocable)
         // );
 
-        _verifyClaim(merkleProof, node);
+        bytes32 leaf = keccak256(
+            bytes.concat(keccak256(abi.encode(account, amount, revocable)))
+        );
+
+        _verifyClaim(merkleProof, leaf);
 
         _setClaimed(index);
 
