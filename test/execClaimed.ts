@@ -4,7 +4,7 @@ import fs from "fs";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  const contractAddress = "0x1740435a8753E33DC09242e9b0E21F8528ff59Da";
+  const contractAddress = "0x71391f3F61a98735bc28F84F3999F921979437B0";
   const tree = StandardMerkleTree.load(
     JSON.parse(fs.readFileSync("tree.json", "utf8"))
   );
@@ -39,6 +39,18 @@ async function main() {
         const claimTx = await MerkleTreeClaim.claim(v[1], proof);
         await claimTx.wait();
         console.log("Tx :", claimTx);
+
+        // Asynchronous redundant function execution test code
+        // for (let i = 0; i < 10; i++) {
+        //   try {
+        //     console.log(`Attempting claim #${i + 1}...`);
+        //     const tx = await MerkleTreeClaim.claim(v[1], proof);
+        //     // await tx.wait();
+        //     console.log(`Claim #${i + 1} successful`);
+        //   } catch (error) {
+        //     console.error(`Claim #${i + 1} failed:`, error);
+        //   }
+        // }
       } else {
         console.log("Invalid proof or user has already claimed.");
       }
