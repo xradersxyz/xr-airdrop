@@ -18,7 +18,7 @@ async function main() {
   console.log(`Has user already claimed : ${hasClaimed}`);
 
   const claimedAmount = await MerkleTreeClaim.claimedAmount(deployer.address);
-  console.log(`Has user claimed amount : ${claimedAmount}`);
+  console.log(`Has user claimed amount : ${ethers.formatEther(claimedAmount)}`);
 
   for (const [i, v] of tree.entries()) {
     if (v[0] === deployer.address) {
@@ -32,8 +32,10 @@ async function main() {
         proof
       );
       if (valid) {
-        console.log(`Unclaimed amount for user is: ${unclaimedAmount} tokens`);
-        // ethers.parseUnits("0.00000000000000001", 18);
+        console.log(
+          `Unclaimed amount for user is: ${ethers.formatEther(unclaimedAmount)} tokens`
+        );
+
         const claimTx = await MerkleTreeClaim.claim(v[1], proof);
         await claimTx.wait();
         console.log("Tx :", claimTx);

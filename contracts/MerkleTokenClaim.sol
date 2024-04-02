@@ -4,11 +4,11 @@ pragma solidity ^0.8.24;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract MerkleTreeClaim is Ownable {
+contract MerkleTreeClaim is Ownable, ReentrancyGuard {
     IERC20 public token;
     bytes32 public merkleRoot;
-    uint8 public decimals = 18;
 
     mapping(address => bool) public claimed;
     mapping(address => uint256) public claimedAmount;
@@ -35,7 +35,10 @@ contract MerkleTreeClaim is Ownable {
      * @param amount The amount to be set
      * @param merkleProof The proof to be set
      */
-    function claim(uint256 amount, bytes32[] calldata merkleProof) external {
+    function claim(
+        uint256 amount,
+        bytes32[] calldata merkleProof
+    ) external nonReentrant {
         require(!claimed[msg.sender], "Already claimed.");
         bytes32 leaf = keccak256(
             bytes.concat(keccak256(abi.encode(msg.sender, amount)))
