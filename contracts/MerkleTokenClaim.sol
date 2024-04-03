@@ -68,16 +68,15 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard {
      * @param account The address to be set
      * @param amount The amount to be set
      * @param merkleProof The merkleProof to be set
-     * @return bool veridation
      * @return uint256 Return unclaimed token quantity
      */
     function getUnclaimedAmount(
         address account,
         uint256 amount,
         bytes32[] calldata merkleProof
-    ) external view returns (bool, uint256) {
+    ) external view returns (uint256) {
         if (claimed[account]) {
-            return (false, 0); //If a claim has already been made
+            return 0; //If a claim has already been made
         }
         bytes32 leaf = keccak256(
             bytes.concat(keccak256(abi.encode(account, amount)))
@@ -85,9 +84,9 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard {
 
         bool valid = MerkleProof.verify(merkleProof, merkleRoot, leaf);
         if (!valid) {
-            return (false, 0); //If Merkle Proof is invalid
+            return 0; //If Merkle Proof is invalid
         }
-        return (true, amount);
+        return amount;
     }
 
     /**
