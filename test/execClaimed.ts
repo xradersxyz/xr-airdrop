@@ -31,12 +31,12 @@ async function main() {
       console.log("Value:", v);
       console.log("Proof:", proof);
 
-      const [valid, unclaimedAmount] = await MerkleTreeClaim.getUnclaimedAmount(
+      const unclaimedAmount = await MerkleTreeClaim.getUnclaimedAmount(
         deployer.address,
         v[1],
         proof
       );
-      if (valid) {
+      if (unclaimedAmount > 0) {
         console.log(
           `Unclaimed amount for user is: ${ethers.formatEther(unclaimedAmount)} tokens`
         );

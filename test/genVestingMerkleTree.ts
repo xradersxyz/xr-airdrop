@@ -8,33 +8,33 @@ const claims = [
   [
     {
       index: "0",
-      address: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
-      amount: "5000000",
+      address: "0xF3023840099527fb39d380C1B75896b449f089F9",
+      amount: "120000000000000000000",
       revocable: "true",
     },
   ],
   [
     {
       index: "1",
-      address: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-      amount: "1000000",
-      revocable: "false",
+      address: "0x4652E51697594F9f6D4E900c90bDD525c15B3BF0",
+      amount: "150000000000000000000",
+      revocable: "true",
     },
   ],
   [
     {
       index: "2",
-      address: "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-      amount: "3000000",
+      address: "0xfcc2889e8daaDd74481f3FfDbC7eDf5795448b22",
+      amount: "180000000000000000000",
       revocable: "true",
     },
   ],
   [
     {
       index: "3",
-      address: "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
-      amount: "4000000",
-      revocable: "false",
+      address: "0x3539CFd942fcC01cb8D5AA1511dC6b3E3f2fDDDe",
+      amount: "200216000000000000000",
+      revocable: "true",
     },
   ],
 ];

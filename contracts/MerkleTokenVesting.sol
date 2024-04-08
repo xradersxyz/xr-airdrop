@@ -6,8 +6,14 @@ pragma solidity ^0.8.24;
 import "./abstract/TokenVesting.sol";
 import "./abstract/MerkleDistributor.sol";
 import "./interface/IBunzz.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract MerkleTokenVesting is TokenVesting, MerkleDistributor, IBunzz {
+contract MerkleTokenVesting is
+    TokenVesting,
+    MerkleDistributor,
+    IBunzz,
+    ReentrancyGuard
+{
     event Claimed(
         uint256 index,
         address account,
@@ -46,7 +52,7 @@ contract MerkleTokenVesting is TokenVesting, MerkleDistributor, IBunzz {
         uint256 amount,
         bool revocable,
         bytes32[] calldata merkleProof
-    ) external {
+    ) external nonReentrant {
         require(!isClaimed(index), "Award already claimed");
 
         // Verify the merkle proof.
@@ -55,7 +61,9 @@ contract MerkleTokenVesting is TokenVesting, MerkleDistributor, IBunzz {
         // );
 
         bytes32 leaf = keccak256(
-            bytes.concat(keccak256(abi.encode(account, amount, revocable)))
+            bytes.concat(
+                keccak256(abi.encode(index, account, amount, revocable))
+            )
         );
 
         _verifyClaim(merkleProof, leaf);

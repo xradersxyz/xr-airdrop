@@ -115,15 +115,15 @@ abstract contract TokenVesting is Ownable {
     ) public view returns (uint256) {
         TokenAward memory award = getTokenAward(beneficiary);
 
-        if (block.number < vestingCliff) {
+        if (block.timestamp < vestingCliff) {
             return 0;
         } else if (
-            block.number >= vestingStart + vestingDuration || award.revoked
+            block.timestamp >= vestingStart + vestingDuration || award.revoked
         ) {
             return award.amount;
         } else {
             return
-                (award.amount * (block.number - vestingStart)) /
+                (award.amount * (block.timestamp - vestingStart)) /
                 vestingDuration;
         }
     }
