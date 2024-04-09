@@ -34,20 +34,28 @@ async function main() {
       console.log("Proof:", proof);
 
       const awards = MerkleTokenVesting.awards(deployer.address);
+      console.log(`Awards Info : ${awards}`);
 
-      const releasableAmount = await MerkleTokenVesting.getReleasableAmount(
-        deployer.address
-      );
+      const isClaimed = await MerkleTokenVesting.isClaimed(v[0]["index"]);
+      console.log(`isClaimed Info : ${isClaimed}`);
 
-      console.log(
-        `Has user releasable amount : ${ethers.formatEther(releasableAmount)}`
-      );
+      if (isClaimed) {
+        const releasableAmount = await MerkleTokenVesting.getReleasableAmount(
+          deployer.address
+        );
 
-      if (releasableAmount > 0) {
-        console.log("Claiming vested tokens...");
-        const release = await MerkleTokenVesting.release(deployer.address);
-        await release.wait();
-        console.log("Vested tokens claimed successfully.\n", release);
+        console.log(
+          `Has user releasable amount : ${ethers.formatEther(releasableAmount)}`
+        );
+
+        if (releasableAmount > 0) {
+          console.log("Claiming vested tokens...");
+          const release = await MerkleTokenVesting.release(deployer.address);
+          await release.wait();
+          console.log("Vested tokens claimed successfully.\n", release);
+        } else {
+          console.log("There are no vesting tokens to claim.\n");
+        }
       } else {
         //Call only once initially. Call if you are eligible for vesting and have proof.
         const claimAwardTx = await MerkleTokenVesting.claimAward(
