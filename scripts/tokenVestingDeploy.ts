@@ -8,8 +8,8 @@ async function main() {
 
   const tokenAddress =
     process.env.MAIN_NET == "1"
-      ? (process.env.BSC_CONTRACT_ADDRESS_MAINNET as string)
-      : (process.env.BSC_CONTRACT_ADDRESS_TESTNET as string);
+      ? (process.env.XR_CONTRACT_ADDRESS_MAINNET as string)
+      : (process.env.XR_CONTRACT_ADDRESS_TESTNET as string);
 
   const startDate = new Date("2024-04-02T00:00:00Z");
   const start = Math.floor(startDate.getTime() / 1000); // Set specified start date relative to UTC

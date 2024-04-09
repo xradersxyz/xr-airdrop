@@ -5,8 +5,8 @@ async function main() {
 
   const contractAddress =
     process.env.MAIN_NET == "1"
-      ? "0x98439204670b302E873d7c274581207020B37294"
-      : "0x98439204670b302E873d7c274581207020B37294";
+      ? (process.env.CLAIM_CONTRACT_ADDRESS_MAINNET as string)
+      : (process.env.CLAIM_CONTRACT_ADDRESS_TESTNET as string);
 
   const MerkleTreeClaim = await ethers.getContractAt(
     "MerkleTreeClaim",
