@@ -7,8 +7,8 @@ async function main() {
 
   const contractAddress =
     process.env.MAIN_NET == "1"
-      ? "0x71391f3F61a98735bc28F84F3999F921979437B0"
-      : "0x71391f3F61a98735bc28F84F3999F921979437B0";
+      ? process.env.CLAIM_CONTRACT_ADDRESS_MAINNET
+      : process.env.CLAIM_CONTRACT_ADDRESS_TESTNET;
 
   const tree = StandardMerkleTree.load(
     JSON.parse(fs.readFileSync("tree.json", "utf8"))
@@ -16,7 +16,7 @@ async function main() {
 
   const MerkleTreeClaim = await ethers.getContractAt(
     "MerkleTreeClaim",
-    contractAddress
+    contractAddress as string
   );
 
   const hasClaimed = await MerkleTreeClaim.claimed(deployer.address);

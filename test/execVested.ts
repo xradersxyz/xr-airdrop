@@ -7,8 +7,8 @@ async function main() {
 
   const contractAddress =
     process.env.MAIN_NET == "1"
-      ? "0xBAc35614Db92dce58d33dadc0D34090eE28aB5EE"
-      : "0xB3B91598242EFEB02b922837aD1C0d3d3159D499";
+      ? process.env.VESTING_CONTRACT_ADDRESS_MAINNET
+      : process.env.VESTING_CONTRACT_ADDRESS_TESTNET;
 
   const claims = StandardMerkleTree.load(
     JSON.parse(fs.readFileSync("claims.json", "utf8"))
@@ -16,7 +16,7 @@ async function main() {
 
   const MerkleTokenVesting = await ethers.getContractAt(
     "MerkleTokenVesting",
-    contractAddress
+    contractAddress as string
   );
 
   const vestedAmount = await MerkleTokenVesting.getVestedAmount(
