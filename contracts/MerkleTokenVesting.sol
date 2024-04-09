@@ -46,6 +46,14 @@ contract MerkleTokenVesting is
         _setTokenContract(otherContracts[0]);
     }
 
+    /**
+     * A function that allows the contract owner to withdraw all tokens deposited in the contract
+     */
+    function withdrawAll() public onlyOwner {
+        uint256 balance = targetToken.balanceOf(address(this));
+        require(targetToken.transfer(owner(), balance), "Transfer failed");
+    }
+
     function claimAward(
         uint256 index,
         address account,
