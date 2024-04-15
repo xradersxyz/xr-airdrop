@@ -5,13 +5,13 @@ pragma solidity ^0.8.24;
 // import "hardhat/console.sol";
 import "./abstract/TokenVesting.sol";
 import "./abstract/MerkleDistributor.sol";
-import "./interface/IBunzz.sol";
+import "./interface/IConnectToken.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract MerkleTokenVesting is
     TokenVesting,
     MerkleDistributor,
-    IBunzz,
+    IConnectToken,
     ReentrancyGuard
 {
     event Claimed(
