@@ -5,8 +5,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
 
-contract MerkleTreeClaim is Ownable, ReentrancyGuard {
+contract MerkleTreeClaim is Ownable, ReentrancyGuard, Pausable {
     IERC20 public token;
     bytes32 public merkleRoot;
 
@@ -74,7 +75,7 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard {
         address account,
         uint256 amount,
         bytes32[] calldata merkleProof
-    ) external view returns (uint256) {
+    ) external view whenNotPaused returns (uint256) {
         if (claimed[account]) {
             return 0; //If a claim has already been made
         }
@@ -92,7 +93,7 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard {
     /**
      * A function that allows the contract owner to withdraw all tokens deposited in the contract
      */
-    function withdrawAll() public onlyOwner {
+    function withdrawAll() public onlyOwner whenNotPaused {
         uint256 balance = token.balanceOf(address(this));
         require(token.transfer(owner(), balance), "Transfer failed");
     }
@@ -101,7 +102,9 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard {
      * Merkle Root update function (for administrators)
      * @param _newMerkleRoot The new Merkle root to be set
      */
-    function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyOwner {
+    function updateMerkleRoot(
+        bytes32 _newMerkleRoot
+    ) external onlyOwner whenNotPaused {
         merkleRoot = _newMerkleRoot;
     }
 }

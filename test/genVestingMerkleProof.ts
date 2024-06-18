@@ -6,13 +6,13 @@ const tree = StandardMerkleTree.load(
   JSON.parse(fs.readFileSync("claims.json", "utf8"))
 );
 
-console.log("Tree root:", tree);
-console.log("Tree root:", tree.root);
+// console.log("Tree root:", tree);
+// console.log("Tree root:", tree.root);
 
 for (const [i, v] of tree.entries()) {
-  if (v[0]["address"] === "0xF3023840099527fb39d380C1B75896b449f089F9") {
-    const proof = tree.getProof(i);
-    console.log("Value:", v);
-    console.log("Proof:", proof);
-  }
+  // if (v[0]["address"] === "0xF3023840099527fb39d380C1B75896b449f089F9") {
+  const proof = tree.getProof(i);
+  console.log("Value:", v);
+  console.log("Proof:", proof);
+  // }
 }
