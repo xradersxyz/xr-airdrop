@@ -39,7 +39,7 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard, Pausable {
     function claim(
         uint256 amount,
         bytes32[] calldata merkleProof
-    ) external nonReentrant {
+    ) external nonReentrant whenNotPaused {
         require(!claimed[msg.sender], "Already claimed.");
         bytes32 leaf = keccak256(
             bytes.concat(keccak256(abi.encode(msg.sender, amount)))
