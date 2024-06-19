@@ -8,32 +8,16 @@ const claims = [
   [
     {
       index: "0",
-      address: "0xF3023840099527fb39d380C1B75896b449f089F9",
-      amount: "120000000000000000000",
+      address: "0xC371c6872BA399e8487bD65C8dd1F310C13D6bb8",
+      amount: "100000000000000000000",
       revocable: "true",
     },
   ],
   [
     {
       index: "1",
-      address: "0x4652E51697594F9f6D4E900c90bDD525c15B3BF0",
-      amount: "150000000000000000000",
-      revocable: "true",
-    },
-  ],
-  [
-    {
-      index: "2",
-      address: "0xfcc2889e8daaDd74481f3FfDbC7eDf5795448b22",
-      amount: "180000000000000000000",
-      revocable: "true",
-    },
-  ],
-  [
-    {
-      index: "3",
-      address: "0x3539CFd942fcC01cb8D5AA1511dC6b3E3f2fDDDe",
-      amount: "200216000000000000000",
+      address: "0x14b40524601C2F28a94178BF30adF60e42aA5270",
+      amount: "200000000000000000000",
       revocable: "true",
     },
   ],
@@ -44,4 +28,4 @@ const tree = StandardMerkleTree.of(claims, [
 ]);
 console.log(`Merkle Root: ${tree.root}`);
 console.log(tree.render());
-fs.writeFileSync("claims.json", JSON.stringify(tree.dump()));
+fs.writeFileSync("vesting.json", JSON.stringify(tree.dump()));

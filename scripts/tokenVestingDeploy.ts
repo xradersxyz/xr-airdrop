@@ -11,13 +11,13 @@ async function main() {
       ? (process.env.XR_CONTRACT_ADDRESS_MAINNET as string)
       : (process.env.XR_CONTRACT_ADDRESS_TESTNET as string);
 
-  const startDate = new Date("2024-04-02T00:00:00Z");
+  const startDate = new Date("2024-04-18T03:00:00Z");
   const start = Math.floor(startDate.getTime() / 1000); // Set specified start date relative to UTC
   const cliff = 0; // Cliff period: 60 * 60 * 24 * 90 90 days
   const duration = 60 * 60 * 24 * 7; // Total vesting period: 90 days
 
   const claims = StandardMerkleTree.load(
-    JSON.parse(fs.readFileSync("claims.json", "utf8"))
+    JSON.parse(fs.readFileSync("vesting.json", "utf8"))
   );
 
   console.log("Deploying contracts with the account :", deployer.address);

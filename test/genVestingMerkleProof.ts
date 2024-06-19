@@ -3,7 +3,7 @@ import { StandardMerkleTree } from "@openzeppelin/merkle-tree";
 import fs from "fs";
 
 const tree = StandardMerkleTree.load(
-  JSON.parse(fs.readFileSync("claims.json", "utf8"))
+  JSON.parse(fs.readFileSync("vesting.json", "utf8"))
 );
 
 // console.log("Tree root:", tree);

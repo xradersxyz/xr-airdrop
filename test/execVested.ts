@@ -11,7 +11,7 @@ async function main() {
       : process.env.VESTING_CONTRACT_ADDRESS_TESTNET;
 
   const claims = StandardMerkleTree.load(
-    JSON.parse(fs.readFileSync("claims.json", "utf8"))
+    JSON.parse(fs.readFileSync("vesting.json", "utf8"))
   );
 
   const MerkleTokenVesting = await ethers.getContractAt(

@@ -12,7 +12,7 @@ async function main() {
       : (process.env.XR_CONTRACT_ADDRESS_TESTNET as string);
 
   const tree = StandardMerkleTree.load(
-    JSON.parse(fs.readFileSync("tree.json", "utf8"))
+    JSON.parse(fs.readFileSync("claim.json", "utf8"))
   );
 
   console.log("Deploying contracts with the account :", deployer.address);

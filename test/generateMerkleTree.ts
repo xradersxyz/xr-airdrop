@@ -14,4 +14,4 @@ const addresses = [
 const tree = StandardMerkleTree.of(addresses, ["address", "uint256"]);
 console.log(`Merkle Root: ${tree.root}`);
 console.log(tree.render());
-fs.writeFileSync("tree.json", JSON.stringify(tree.dump()));
+fs.writeFileSync("claim.json", JSON.stringify(tree.dump()));

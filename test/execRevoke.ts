@@ -13,7 +13,7 @@ async function main() {
   const revoekeUserAdderess = "0x4652E51697594F9f6D4E900c90bDD525c15B3BF0";
 
   const claims = StandardMerkleTree.load(
-    JSON.parse(fs.readFileSync("claims.json", "utf8"))
+    JSON.parse(fs.readFileSync("vesting.json", "utf8"))
   );
 
   const MerkleTokenVesting = await ethers.getContractAt(

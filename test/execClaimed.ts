@@ -11,7 +11,7 @@ async function main() {
       : process.env.CLAIM_CONTRACT_ADDRESS_TESTNET;
 
   const tree = StandardMerkleTree.load(
-    JSON.parse(fs.readFileSync("tree.json", "utf8"))
+    JSON.parse(fs.readFileSync("claim.json", "utf8"))
   );
 
   const MerkleTreeClaim = await ethers.getContractAt(

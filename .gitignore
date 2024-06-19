@@ -13,5 +13,5 @@ node_modules
 /coverage
 /coverage.json
 
-tree.json
-claims.json
+claim.json
+vesting.json
