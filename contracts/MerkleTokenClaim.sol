@@ -31,6 +31,14 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard, Pausable {
         merkleRoot = _merkleRoot;
     }
 
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+
     /**
      * Occurs when a claim token is rewarded to the beneficiary.
      * @param amount The amount to be set
