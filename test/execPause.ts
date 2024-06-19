@@ -15,8 +15,9 @@ async function main() {
   );
 
   console.log(`pause : start`);
-  const pause = await MerkleTreeClaim.pause();
-  console.log(`pause : ${pause}`);
+  await MerkleTreeClaim.pause();
+  // const pause = await MerkleTreeClaim.unpause();
+  console.log(`pause flag : ${await MerkleTreeClaim.paused}`);
 }
 
 main()
