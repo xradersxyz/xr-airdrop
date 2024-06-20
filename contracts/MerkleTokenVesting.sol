@@ -54,7 +54,15 @@ contract MerkleTokenVesting is
         require(targetToken.transfer(owner(), balance), "Transfer failed");
     }
 
-    function claimAward(
+    /**
+     *
+     * @param index merkle tree index
+     * @param account user address
+     * @param amount user amount
+     * @param revocable revocable true, false
+     * @param merkleProof merole proof byte
+     */
+    function verify(
         uint256 index,
         address account,
         uint256 amount,

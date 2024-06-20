@@ -58,16 +58,16 @@ async function main() {
         }
       } else {
         //Call only once initially. Call if you are eligible for vesting and have proof.
-        const claimAwardTx = await MerkleTokenVesting.claimAward(
+        const verifyTx = await MerkleTokenVesting.verify(
           v[0]["index"],
           v[0]["address"],
           v[0]["amount"],
           v[0]["revocable"],
           proof
         );
-        await claimAwardTx.wait();
+        await verifyTx.wait();
 
-        console.log("registe claimAward.\n", claimAwardTx);
+        console.log("reg verify.\n", verifyTx);
       }
     }
   }
