@@ -40,6 +40,10 @@ contract MerkleTokenVesting is
         MerkleDistributor(merkleRoot)
     {}
 
+    /**
+     *
+     * @param otherContracts XR token contract address
+     */
     function connectToOtherContracts(
         address[] memory otherContracts
     ) external override onlyOwner {
@@ -56,11 +60,11 @@ contract MerkleTokenVesting is
 
     /**
      *
-     * @param index merkle tree index
-     * @param account user address
-     * @param amount user amount
-     * @param revocable revocable true, false
-     * @param merkleProof merole proof byte
+     * @param index index of the award
+     * @param account who the token are being awarded to
+     * @param amount amount to be awarded
+     * @param revocable true if revokable
+     * @param merkleProof array of the proof for the leaf
      */
     function verify(
         uint256 index,

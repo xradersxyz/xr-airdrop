@@ -31,10 +31,16 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard, Pausable {
         merkleRoot = _merkleRoot;
     }
 
+    /**
+     * whenNotPaused contract pause
+     */
     function pause() public onlyOwner {
         _pause();
     }
 
+    /**
+     * whenNotPaused contract unpause
+     */
     function unpause() public onlyOwner {
         _unpause();
     }
