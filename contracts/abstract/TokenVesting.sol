@@ -98,6 +98,18 @@ abstract contract TokenVesting is Ownable {
      * @dev Calculates the amount that has already vested but hasn't been released yet.
      * @param beneficiary Who the tokens are being released to
      */
+    function getReleasedAmount(
+        address beneficiary
+    ) public view returns (uint256) {
+        TokenAward memory award = getTokenAward(beneficiary);
+
+        return award.released;
+    }
+
+    /**
+     * @dev Calculates the amount that has already vested but hasn't been released yet.
+     * @param beneficiary Who the tokens are being released to
+     */
     function getReleasableAmount(
         address beneficiary
     ) public view returns (uint256) {
