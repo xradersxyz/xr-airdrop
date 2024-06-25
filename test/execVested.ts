@@ -51,8 +51,20 @@ async function main() {
         if (releasableAmount > 0) {
           console.log("Claiming vested tokens...");
           const release = await MerkleTokenVesting.release(deployer.address);
-          await release.wait();
-          console.log("Vested tokens claimed successfully.\n", release);
+          const receipt = await release.wait();
+          console.log("Vested tokens claimed successfully.\n", receipt);
+
+          // 이벤트 로그에서 토큰 전송 내역 확인
+          if (receipt?.logs) {
+            for (const log of receipt.logs) {
+              try {
+                const parsedLog = MerkleTokenVesting.interface.parseLog(log);
+                console.log("Parsed Log:", parsedLog);
+              } catch (e) {
+                console.log("Log parsing error:", e);
+              }
+            }
+          }
         } else {
           console.log("There are no vesting tokens to claim.\n");
         }

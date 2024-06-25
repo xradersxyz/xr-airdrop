@@ -94,4 +94,12 @@ contract MerkleTokenVesting is
 
         emit Claimed(index, account, amount, revocable);
     }
+
+    /**
+     * Merkle Root update function (for administrators)
+     * @param _newMerkleRoot The new Merkle root to be set
+     */
+    function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyOwner {
+        merkleRoot = _newMerkleRoot;
+    }
 }
