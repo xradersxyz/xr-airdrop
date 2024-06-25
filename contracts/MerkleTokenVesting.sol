@@ -102,4 +102,16 @@ contract MerkleTokenVesting is
     function updateMerkleRoot(bytes32 _newMerkleRoot) external onlyOwner {
         merkleRoot = _newMerkleRoot;
     }
+
+    function updateVestingDate(
+        uint256 start,
+        uint256 cliff,
+        uint256 duration
+    ) external onlyOwner {
+        require(cliff <= duration, "Cliff must be less than duration");
+
+        vestingStart = start;
+        vestingCliff = start + cliff;
+        vestingDuration = duration;
+    }
 }
