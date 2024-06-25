@@ -13,6 +13,14 @@ async function main() {
     contractAddress
   );
 
+  console.log("withdrawAll address", contractAddress);
   const withdrawAllTx = await MerkleTokenVesting.withdrawAll();
   console.log(`withdrawAll : ${withdrawAllTx}`);
 }
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

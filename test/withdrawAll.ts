@@ -16,3 +16,10 @@ async function main() {
   const withdrawAllTx = await MerkleTreeClaim.withdrawAll();
   console.log(`withdrawAll : ${withdrawAllTx}`);
 }
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
