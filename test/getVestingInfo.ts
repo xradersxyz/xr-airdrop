@@ -29,13 +29,13 @@ async function main() {
     console.log("Vesting Info contract owner: ", owner);
 
     const vestingStart = await MerkleTokenVesting.vestingStart();
-    console.log("Vesting Info contract owner: ", vestingStart);
+    console.log("Vesting Info contract vesting start: ", vestingStart);
 
     const vestingCliff = await MerkleTokenVesting.vestingCliff();
-    console.log("Vesting Info contract owner: ", vestingCliff);
+    console.log("Vesting Info contract vesting cliff: ", vestingCliff);
 
     const vestingDuration = await MerkleTokenVesting.vestingDuration();
-    console.log("Vesting Info contract owner: ", vestingDuration);
+    console.log("Vesting Info contract vesting duration: ", vestingDuration);
   } catch (error) {
     console.error("Error fetching contract info: ", error);
   }
