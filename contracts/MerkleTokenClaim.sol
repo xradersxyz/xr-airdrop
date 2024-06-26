@@ -32,6 +32,14 @@ contract MerkleTreeClaim is Ownable, ReentrancyGuard, Pausable {
     }
 
     /**
+     *
+     * @param account The address to be set
+     */
+    function isClaimed(address account) public view returns (bool){
+        return claimed[account];
+    }
+
+    /**
      * whenNotPaused contract pause
      */
     function pause() public onlyOwner {
